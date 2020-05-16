@@ -251,9 +251,9 @@ class Searcher:
 @csrf_exempt
 def searchimage(request):
     if request.method=="POST":
-        url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/bacf249f-dabd-49b7-bfc4-0a550ce20d36/detect/iterations/Iteration10/image"
+        url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/fa8ec60b-53fe-4326-82f9-a0a90f923738/detect/iterations/Iteration1/image"
         filestr = request.FILES['image'].read()
-        headers = {'Prediction-Key': "706fa7352ab24ada8ffa319750e4f238",
+        headers = {'Prediction-Key': "9b06e219ed0f4ae488322505f6f75b86",
                    'Content-Type': 'application/octet-stream'}
         response = requests.post(url, headers=headers, data=filestr)
         response=response.json()
