@@ -1,0 +1,116 @@
+<app-header-top></app-header-top>
+
+<div class="b-wrapper">
+  <app-header></app-header>
+  <div class="b-page_title b-page_title_default text-center">
+    <h1 class="b-entry_title"><span>WISHLIST</span></h1>
+    <div class="b-breadcrumbs">
+      <a href="index.html">Home</a>
+      <span>WISHLIST</span>
+    </div>
+  </div>
+  <section id="b-cart_default">
+    <div class="b-cart b-cart_default b-wishlist_table pb-5">
+      <div class="container">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="!getWishProducts().size"
+        >
+          No products in the Wishlist!
+        </div>
+        <div class="table-responsive" *ngIf="getWishProducts().size">
+          <table id="cart" class="table table-condensed">
+            <thead>
+              <tr>
+                <th style="width: 35%;" class="text-center border-0">
+                  <h6><b>PRODUCT NAME</b></h6>
+                </th>
+                <th style="width: 25%;" class="text-center border-0">
+                  <h6><b>UNIT PRICE</b></h6>
+                </th>
+                <th style="width: 25%;" class="text-center border-0">
+                  <h6><b>STOCK STATUS</b></h6>
+                </th>
+                <th style="width: 15%;" class="text-center border-0"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product_wish of getWishProducts(); let i = index">
+                <td class="text-center">
+                  <div class="b-wish_product">
+                    <i
+                      class="icon-close icons"
+                      (click)="removeProductFromWish(product_wish)"
+                    ></i>
+                    <img
+                      src="assets/images/products/{{ product_wish }}"
+                      class="mx-2"
+                      height="70"
+                      alt=""
+                    />
+                    &nbsp;&nbsp;&nbsp; Product {{ i + 1 }}
+                  </div>
+                </td>
+                <td class="text-center"><span class="b-price">----</span></td>
+                <td class="text-center">
+                  <span class="b-stock_status b-in_stock">IN STOCK</span>
+                </td>
+                <td>
+                  <a
+                    (click)="addProductCart(product_wish)"
+                    style="cursor: pointer; color: white;"
+                    class="btn btn-full"
+                    >ADD TO CART</a
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <app-footer></app-footer>
+  <a href="javascript:;" id="b-scrollToTop" class="b-scrollToTop">
+    <span class="basel-tooltip-label">Scroll To Top</span>Scroll To Top
+  </a>
+  <div class="b-search_popup">
+    <form
+      role="search"
+      method="get"
+      id="searchform"
+      class="searchform basel-ajax-search"
+      action="#"
+      data-thumbnail="1"
+      data-price="1"
+      data-count="3"
+    >
+      <div>
+        <label class="screen-reader-text" for="s"></label>
+        <input
+          type="text"
+          placeholder="Search for products"
+          value=""
+          name="s"
+          id="s"
+          autocomplete="off"
+        />
+        <input type="hidden" name="post_type" id="post_type" value="product" />
+        <button type="submit" class="b-searchsubmit" id="b-searchsubmit">
+          Search
+        </button>
+      </div>
+    </form>
+    <span class="b-close_search" id="b-close_search">close</span>
+  </div>
+</div>
+<!-- JQUERY:: JQUERY.JS -->
+<script src="assets/js/jquery.min.js"></script>
+
+<!-- JQUERY:: BOOTSTRAP.JS -->
+<script src="assets/js/tether.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- JQUERY:: CUSTOM.JS -->
+<script src="assets/js/custom.js"></script>

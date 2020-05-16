@@ -1,0 +1,117 @@
+<header id="b-header">
+  <div class="b-header b-header_bg">
+    <div class="container">
+      <div class="b-header_topbar row clearfix">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+        </div>
+        <div
+          class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm-down"
+        >
+          <div class="b-top_bar_right clearfix">
+            <div class="b-topbar_menu float-md-right text-center">
+              <div class="b-menu_top_bar_container">
+                <ul id="b-menu_top_bar" class="b-menu">
+                  <li>
+                    <a routerLink="/myAccount"
+                      ><i class="fa fa-user mr-1"></i>My Account</a
+                    >
+                  </li>
+
+                  <li><a routerLink="/contactUs">Contact Us</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="b-header b-header_main">
+    <div class="container">
+      <div class="clearfix row">
+        <div
+          class="col-xl-4 col-lg-4 col-mb-4 col-sm-12 col-xs-12 hidden-sm-down hidden-md-down"
+        >
+          <div class="b-header_nav">
+            <div class="b-menu_top_bar_container">
+              <div class="b-main_menu menu-stay-left">
+                <ul class="categories pl-0 mb-0 list-unstyled">
+                  <!-- Mega menu -->
+                  <!-- Top level items -->
+                  <li class="b-has_sub b-dropdown_wrapper from-bottom">
+                    <a href="/" class="description">
+                      <span class="top">Home&nbsp;</span
+                      ><i class="fa fa-home"></i
+                    ></a>
+                  </li>
+                  <!-- Top level items -->
+                  <li class="b-has_sub b-dropdown_wrapper from-bottom">
+                    <a [routerLink]="['/shop']" [queryParams]="{ category: 'all'}" class="description">
+                      <span class="top">Shop&nbsp;</span
+                      ><i class="fa fa-eye"></i
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-mb-4 col-sm-4 col-xs-6">
+          <div class="b-logo text-sm-left text-lg-center text-xl-center">
+            <a href="/" class="d-inline-block"
+              >
+
+              <img
+                src="../../../assets/images/shopping-bag.png"
+                class="img-fluid d-block"
+                alt=""
+                style="display: inline-block;"
+            />
+          </a>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-mb-4 col-sm-8 col-xs-6">
+          <div class="b-header_right">
+            <div class="b-header_links hidden-sm-down">
+              <ul class="pl-0 mb-0 list-unstyled">
+                <li *ngIf="!getEmail()">
+                  <a routerLink="/myAccount">Login / Register</a>
+                </li>
+                <li *ngIf="getEmail()">
+                  <a (click)="logout()">Logout</a>
+                </li>
+              </ul>
+            </div>
+            <div class="b-search_icon hidden-sm-down">
+              <a
+                href="javascript:;"
+                id="b-search_toggle"
+                class="d-inline-block"
+              >
+                <i class="icon-magnifier icons"></i>
+              </a>
+            </div>
+            <div class="b-wishlist_icon" *ngIf="getEmail()">
+              <a routerLink="/wishlist" class="d-inline-block">
+                <i class="icon-heart icons"></i>
+              </a>
+            </div>
+            <div class="b-cart_basket pr-0" *ngIf="getEmail()">
+              <a
+              routerLink="/cart"
+                id="b-mini_cart"
+                class="d-inline-block"
+              >
+                <i class="icon-basket icons"></i>
+              </a>
+            </div>
+            <div class="hidden-lg-up">
+              <i class="icon-menu icons b-nav_icon" id="b-nav_icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

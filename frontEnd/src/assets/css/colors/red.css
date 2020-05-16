@@ -1,0 +1,17 @@
+.b-blog_grid .b-blog_single_header .b-post_cat_pink .b-post_categorie_list {
+  background: #b63d44; }
+
+.b-blog_grid .b-author_info .b-author_name a, .b-header_dark .b-main_menu > ul > li > a:hover, .b-main_menu .dropdown-inner ul > li > a:hover {
+  color: #b63d44; }
+
+.b-banner_lg .b-banner_lg_img h3 {
+  text-shadow: 0 0 5px #191212;
+  -webkit-text-shadow: 0 0 5px #191212; }
+
+.b-banner_lg .b-banner_lg_single .b-banner_view_area .b-newsletter_inner, .b-banner_lg .b-banner_lg_single .b-banner_view_area .b-text_section {
+  border: 20px solid #cb757a; }
+
+.b-header_dark .b-header_right .b-wishlist_icon span {
+  background-color: #b63d44; }
+
+/*# sourceMappingURL=red.css.map */

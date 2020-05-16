@@ -1,0 +1,92 @@
+body {
+  background-color: #111111; }
+
+.b-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  border: none; }
+
+.b-main_menu > ul > li > a {
+  color: #fff; }
+
+.b-newsletter_bg_dark {
+  background-image: url("../../images/newsletter_bg_dark.jpg"); }
+  .b-newsletter_bg_dark h3 {
+    font-family: "Italianno", "sans-serif";
+    font-size: 66px;
+    color: #bc9c72;
+    margin-bottom: 0; }
+
+.b-header_fixed .b-header_main {
+  background-color: rgba(0, 0, 0, 0.76); }
+
+.b-submit {
+  background-color: #bc9c72;
+  color: #fff;
+  border: none; }
+
+.b-blog_grid .b-blog_single_header .b-post_time {
+  background-color: #111; }
+  .b-blog_grid .b-blog_single_header .b-post_time span {
+    color: #fff; }
+.b-blog_grid .b-blog_single_header .b-post_categories .b-post_categorie_list {
+  background-color: #bc9c72; }
+.b-blog_grid .b-blog_single_info h3.b-entry_title a {
+  color: #fff; }
+  .b-blog_grid .b-blog_single_info h3.b-entry_title a:hover {
+    color: #bc9c72; }
+.b-blog_grid .b-blog_single_info .b-author_info .b-reply a {
+  color: #fff; }
+.b-blog_grid .b-blog_single_info .b-author_info .b-author_name a {
+  color: #bc9c72; }
+.b-blog_grid .b-blog_single_info p {
+  color: #fff; }
+
+.b-gallery_logo {
+  background-color: #1b1b1b; }
+
+.b-section_title span.b-section_title_over {
+  font-family: "Italianno";
+  font-size: 38px;
+  color: #bc9c72; }
+.b-section_title h4 {
+  font-size: 36px;
+  font-family: "lora";
+  color: #fff;
+  margin-bottom: 45px; }
+
+.b-header_right .b-search_icon a, .b-header_right .b-wishlist_icon a, .b-header_right .b-cart_basket a {
+  color: #fff; }
+.b-header_right .b-wishlist_icon span {
+  background-color: #bc9c72; }
+
+.b-our_story {
+  background-image: url("../../images/our-story.jpg");
+  background-repeat: no-repeat;
+  padding-top: 100px;
+  padding-bottom: 100px; }
+
+.btn.btn-bg {
+  background-color: #bc9c72;
+  color: #fff; }
+
+/* Testimonial Circle Image */
+.b-testimonial_img_circle {
+  margin-bottom: 50px; }
+  .b-testimonial_img_circle .b-testimonial_in {
+    padding-bottom: 20px; }
+    .b-testimonial_img_circle .b-testimonial_in img {
+      border-radius: 50%;
+      -webkit-border-radius: 50%; }
+    .b-testimonial_img_circle .b-testimonial_in p {
+      color: #fff;
+      font-size: 14px; }
+    .b-testimonial_img_circle .b-testimonial_in span {
+      font-size: 14px;
+      color: #fff;
+      opacity: 0.7; }
+
+/*# sourceMappingURL=dark.css.map */

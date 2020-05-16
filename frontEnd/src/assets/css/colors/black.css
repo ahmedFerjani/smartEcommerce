@@ -1,0 +1,169 @@
+.b-header_bg {
+  background-color: #212121; }
+
+.b-sidemenu_sides {
+  background-color: #f4f4f4;
+  position: relative; }
+  .b-sidemenu_sides::before {
+    position: absolute;
+    height: 63px;
+    background-color: #fff;
+    left: 0;
+    top: 0;
+    content: "";
+    width: 100%; }
+
+.b-header {
+  border: none; }
+  .b-header .container {
+    max-width: 1140px;
+    width: 100%; }
+
+.b-header_nav_center .b-main_menu > ul > li.b-dropdown_wrapper > a {
+  padding-left: 6px;
+  padding-right: 18px; }
+
+.b-main_menu.b-vertical .menu-heading {
+  background-color: #191919; }
+  .b-main_menu.b-vertical .menu-heading .fa-angle-down {
+    top: 32px; }
+.b-main_menu.b-vertical > .b-dropdown_content {
+  background-color: #212121;
+  position: relative;
+  border-bottom: 3px solid #191919;
+  z-index: 1; }
+.b-main_menu.b-vertical > ul > li:hover > a {
+  background-color: #fbbc34; }
+
+.b-blog_grid .b-blog_single_header .b-post_categories .b-post_categorie_list {
+  background-color: #212121; }
+
+.b-search_bar {
+  padding-top: 8px; }
+  .b-search_bar form {
+    position: relative; }
+  .b-search_bar button.btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: transparent;
+    border: none;
+    padding-top: 13px;
+    padding-bottom: 8px;
+    font-size: 20px;
+    font-weight: 700; }
+  .b-search_bar input[type="text"] {
+    border-width: 2px;
+    height: 45px; }
+
+.b-featured_cat-2 .b-featured_cat_in .b-cat_overlay.b-cat_overlay_bg {
+  height: auto;
+  text-align: center;
+  max-width: calc(100% - 30px);
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  top: auto;
+  margin: auto; }
+  .b-featured_cat-2 .b-featured_cat_in .b-cat_overlay.b-cat_overlay_bg > div {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 15px 30px;
+    display: inline-block; }
+  .b-featured_cat-2 .b-featured_cat_in .b-cat_overlay.b-cat_overlay_bg h3 {
+    font-family: "Lora","sans-serif";
+    font-size: 24px;
+    font-style: italic;
+    display: inline-block;
+    border-bottom: 1px solid #fff;
+    margin-top: 0; }
+  .b-featured_cat-2 .b-featured_cat_in .b-cat_overlay.b-cat_overlay_bg span {
+    display: block;
+    color: #fff; }
+
+.b-cat_bg_img {
+  background: url("../../images/bg-products.jpg") no-repeat;
+  background-size: 100%;
+  position: relative; }
+  .b-cat_bg_img::after {
+    content: "";
+    height: 100px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    position: absolute;
+    width: 100%; }
+  .b-cat_bg_img .b-featured_cat .b-featured_cat_in {
+    z-index: 9; }
+
+.b-bg_overlay {
+  position: relative; }
+  .b-bg_overlay::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4); }
+
+.b-feature_prod_text span.b-subline {
+  display: block;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-size: 12px;
+  color: #b1b1b1; }
+.b-feature_prod_text h2 {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 42px;
+  line-height: 50px; }
+.b-feature_prod_text span.b-price {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 42px;
+  line-height: 50px;
+  color: #212121;
+  display: block;
+  margin-bottom: 10px; }
+.b-feature_prod_text .btn {
+  background-color: #212121;
+  color: #fff; }
+  .b-feature_prod_text .btn:hover {
+    background-color: #191919; }
+
+.b-featured_cat-2 .b-featured_cat_in .b-cat_overlay h3 {
+  margin-top: 20%;
+  line-height: 30px; }
+
+.b-block_four_info a.b-read_more {
+  text-decoration: underline;
+  color: #797979; }
+  .b-block_four_info a.b-read_more:hover {
+    color: #000; }
+
+.b-instagram_feeds {
+  position: relative; }
+
+.b-instagram_content_inner {
+  z-index: 5;
+  background: #fff;
+  outline: 5px solid rgba(255, 255, 255, 0.5);
+  max-width: 300px;
+  height: 220px;
+  margin: auto;
+  width: 100%;
+  padding: 25px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0; }
+
+@media (max-width: 1023px) {
+  .b-featured_cat-2 .b-featured_cat_in .b-cat_overlay h3 {
+    line-height: 20px;
+    font-size: 16px; } }
+
+/*# sourceMappingURL=black.css.map */

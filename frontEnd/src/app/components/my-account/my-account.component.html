@@ -1,0 +1,245 @@
+<app-header-top></app-header-top>
+
+<div class="b-wrapper">
+  <app-header></app-header>
+
+  <div class="b-page_title b-page_title_default text-center">
+    <h1 class="b-entry_title"><span>My Account</span></h1>
+    <div class="b-breadcrumbs">
+      <a href="index.html">Home</a>
+      <span>My Account</span>
+    </div>
+  </div>
+
+  <section id="b-my_account" [hidden]="getEmail()">
+    <div class="container b-my_account">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="b-auth_section b-auth_login">
+            <h2><i class="icon-login icons"></i> Login</h2>
+
+            <br />
+            <br />
+
+            <div style="text-align: center;">
+              <hr />
+              <h4>Login via face recognition</h4>
+              <hr />
+
+              <div class="form-group">
+                <button (click)="startCamera()">
+                  open my cam
+                </button>
+                <div>
+                  <div>
+                    <video #video class="vid" autoplay></video>
+                  </div>
+                  <div class="pb-2">
+                    <button (click)="capture()">
+                      Capture Image
+                    </button>
+                  </div>
+                  <div>
+                    <canvas #canvas class="vid" id="canvas"></canvas>
+                  </div>
+                </div>
+                <h1>Then upload your image</h1>
+                <img
+                  src="../../../assets/images/photography.png"
+                  alt=""
+                  height="200px"
+                  width="200px"
+                  (click)="uploadImage.click()"
+                  style="cursor: pointer;"
+                />
+
+                <input
+                  type="file"
+                  name=""
+                  #uploadImage
+                  id=""
+                  style="visibility: hidden;"
+                  (change)="imageFaceSelected($event)"
+                />
+                <mat-spinner
+                  *ngIf="showSpinner"
+                  style="margin: 0 auto;"
+                  mode="indeterminate"
+                  diameter="60"
+                ></mat-spinner>
+              </div>
+              <hr />
+              <h4>Or enter your credentials</h4>
+              <hr />
+            </div>
+            <form [formGroup]="loginForm">
+              <div class="form-group">
+                <label for=""
+                  >Username or email address
+                  <span class="b-required">*</span></label
+                >
+                <input type="email" formControlName="email" />
+              </div>
+              <div class="form-group">
+                <label for="">Password <span class="b-required">*</span></label>
+                <input type="password" formControlName="password" />
+              </div>
+              <div class="form-group clearfix">
+                <label class="pull-left"
+                  ><input name="" type="checkbox" value="" /> Remember me</label
+                >
+                <a href="#" class="pull-right b-lost_password"
+                  ><i class="icon-support icons"></i> Lost your password?</a
+                >
+              </div>
+              <button type="button" class="btn" (click)="onSaveFormLogin()">
+                Login
+              </button>
+            </form>
+          </div>
+          <div class="b-auth_section b-auth_register" style="display: none;">
+            <h2><i class="icon-user icons"></i> Register</h2>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+              <div class="form-group">
+                <label for=""
+                  >First Name<span class="b-required">*</span></label
+                >
+                <input type="text" formControlName="firstname" />
+              </div>
+              <div class="form-group">
+                <label for="">Last Name<span class="b-required">*</span></label>
+                <input type="text" formControlName="lastname" />
+              </div>
+              <div class="form-group">
+                <label for=""
+                  >Email address <span class="b-required">*</span></label
+                >
+                <input type="email" formControlName="email" />
+              </div>
+              <div class="form-group">
+                <label for="">Password <span class="b-required">*</span></label>
+                <input type="password" formControlName="password" />
+              </div>
+
+              <button type="submit" class="btn">Register</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="b-auth_text text-center b-auth_text_register">
+            <h3>Register</h3>
+            <p>
+              Registering for this site allows you to access your order status
+              and history. Just fill in the fields below, and we’ll get a new
+              account set up for you in no time. We will only ask you for
+              information necessary to make the purchase process faster and
+              easier.
+            </p>
+            <a href="javascript:;" class="btn" id="b-register_but">Register</a>
+          </div>
+          <div
+            class="b-auth_text text-center b-auth_text_login"
+            style="display: none;"
+          >
+            <h3>Login</h3>
+            <p>
+              Registering for this site allows you to access your order status
+              and history. Just fill in the fields below, and we’ll get a new
+              account set up for you in no time. We will only ask you for
+              information necessary to make the purchase process faster and
+              easier.
+            </p>
+            <a href="javascript:;" class="btn" id="b-login_but">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="b-my_account" *ngIf="getEmail()">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="header-image"></div>
+        <mat-card-title>Shiba Inu</mat-card-title>
+        <mat-card-subtitle>{{ getEmail() }}</mat-card-subtitle>
+      </mat-card-header>
+      <div style="text-align: center;">
+        <img
+          mat-card-image
+          style="height: 300px; width: 800px;"
+          src="../../../assets/images/welcome.png"
+          alt="Cover Photo"
+        />
+      </div>
+
+      <mat-card-content>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                About Face Recognition
+              </mat-panel-title>
+              <mat-panel-description>
+                Learn more about Face Recognition
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <h3>
+              Face recognition is an easy,secure and faster way to connect to
+              our website
+            </h3>
+            <h3>
+              Only few steps ahead then you can use this feature.
+            </h3>
+            <div>
+              <mat-tab-group>
+                <mat-tab label="What's next ?"
+                  ><br />
+                  To unlock the face recognition feature you should upload
+                  images that cover your face
+                </mat-tab>
+                <mat-tab label="Need advices ?"
+                  ><br />
+                  We advice you to upload about 5 to 10 image, the images should
+                  be clear and cover your face
+                </mat-tab>
+                <mat-tab label="My images"
+                  ><br />
+                  Content 3
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card-content>
+      <mat-card-actions style="text-align: center;">
+        <button mat-flat-button color="primary" (click)="uploadImage.click()">
+          <mat-icon>face</mat-icon> Upload new image
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <input
+      type="file"
+      name=""
+      #uploadImage
+      id=""
+      style="visibility: hidden;"
+      (change)="imageSelected($event)"
+    />
+  </section>
+  <app-footer></app-footer>
+  <a href="javascript:;" id="b-scrollToTop" class="b-scrollToTop">
+    <span class="basel-tooltip-label">Scroll To Top</span>Scroll To Top
+  </a>
+  <app-search></app-search>
+</div>
+
+<!-- JQUERY:: JQUERY.JS -->
+<script src="assets/js/jquery.min.js"></script>
+
+<!-- JQUERY:: BOOTSTRAP.JS -->
+<script src="assets/js/tether.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- JQUERY:: CUSTOM.JS -->
+<script src="assets/js/custom.js"></script>

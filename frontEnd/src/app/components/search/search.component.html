@@ -1,0 +1,93 @@
+<div class="b-search_popup">
+  <form
+    role="search"
+    method="get"
+    id="searchform"
+    class="searchform basel-ajax-search"
+    action="#"
+    data-thumbnail="1"
+    data-price="1"
+    data-count="3"
+  >
+    <div>
+      <label class="screen-reader-text" for="s"></label>
+      <input
+        type="text"
+        placeholder="Search by text"
+        value=""
+        name="s"
+        id="s"
+        autocomplete="off"
+        #text
+      />
+      <input type="hidden" name="post_type" id="post_type" value="product" />
+      <button
+        type="submit"
+        class="b-searchsubmit"
+        id="b-searchsubmit"
+        (click)="searchByText(text.value)"
+      >
+        Search
+      </button>
+    </div>
+    <hr />
+    <div style="text-align: center; width: 100%;">
+      <h1 class="large_h" style="display: inline-block; text-align: left;">Search by image &nbsp;&nbsp;&nbsp;</h1>
+      <button
+        type="button"
+        mat-icon-button
+        class="large_button"
+        (click)="uploadImage.click()"
+        style="text-align: right;"
+      >
+        <mat-icon class="large_icon" [inline]="true">insert_photo</mat-icon>
+      </button>
+    </div>
+    <input
+      type="file"
+      name=""
+      #uploadImage
+      id=""
+      style="visibility: hidden;"
+      (change)="imageSelected($event)"
+    />
+    <br><br>
+    <div style="width: 100%; text-align: center;">
+      <h1 class="large_h" style="display: inline-block;">Search by voice &nbsp;&nbsp;&nbsp;</h1>
+
+      <button
+        type="button"
+        mat-icon-button
+        class="large_button"
+      >
+        <mat-icon class="large_icon" [inline]="true" (click)="voiceSearch()">settings_voice</mat-icon>
+      </button>
+      <input #searchKey name="q" id="searchKey" type="hidden">
+    </div>
+
+  </form>
+  <span class="b-close_search" id="b-close_search">close</span>
+</div>
+
+<!-- JQUERY:: JQUERY.JS -->
+<script src="assets/js/jquery.min.js"></script>
+
+<!-- JQUERY:: BOOTSTRAP.JS -->
+<script src="assets/js/tether.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- JQUERY:: OWL.JS -->
+<script src="assets/js/plugins/owl/owl.carousel.min.js"></script>
+
+<!-- REVOLUTION JS FILES -->
+<script src="assets/js/plugins/revolution/jquery.themepunch.tools.min.js"></script>
+<script src="assets/js/plugins/revolution/jquery.themepunch.revolution.min.js"></script>
+
+<!-- SLIDER REVOLUTION 5.0 EXTENSIONS -->
+<script src="assets/js/plugins/revolution/revolution.extension.layeranimation.min.js"></script>
+<script src="assets/js/plugins/revolution/revolution.extension.navigation.min.js"></script>
+<script src="assets/js/plugins/revolution/revolution.extension.parallax.min.js"></script>
+<script src="assets/js/plugins/revolution/revolution.extension.slideanims.min.js"></script>
+
+<!-- JQUERY:: CUSTOM.JS -->
+<script src="assets/js/custom.js"></script>

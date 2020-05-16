@@ -1,0 +1,357 @@
+<app-header-top></app-header-top>
+
+<div class="b-wrapper">
+  <app-header></app-header>
+  <div class="b-page_title b-page_title_default text-center b-shop_filter">
+    <br /><br />
+    <div class="col-sm-12">
+      <ul class="list-inline text-center">
+        <li>
+          <a
+            [routerLink]="['/shop']"
+            [queryParams]="{ category: 'all' }"
+            routerLinkActive="b-active"
+            >All</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/shop']"
+            [queryParams]="{ category: 'glasses' }"
+            routerLinkActive="b-active"
+            >GLASSES</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/shop']"
+            [queryParams]="{ category: 'jackets' }"
+            routerLinkActive="b-active"
+            >JACKETS</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/shop']"
+            [queryParams]="{ category: 'shoes' }"
+            routerLinkActive="b-active"
+            >SHOES</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/shop']"
+            [queryParams]="{ category: 'skirts' }"
+            routerLinkActive="b-active"
+            >SKIRTS</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/shop']"
+            [queryParams]="{ category: 'trousers' }"
+            routerLinkActive="b-active"
+            >TROUSERS</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/shop']"
+            [queryParams]="{ category: 'watches' }"
+            routerLinkActive="b-active"
+            >WATCHES</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div
+    class="b-page_title b-page_title_default text-center b-shop_filter"
+    style="background-color: white; color: black;"
+    *ngIf="category === 'search'"
+  >
+    <div class="col-sm-12">
+      <h1>Selected image for search :</h1>
+      <img
+        src="assets/images/products/{{ selectedimage }}"
+        alt="selected image"
+        height="10%"
+        width="10%"
+      />
+      <br />
+      <mat-spinner
+        *ngIf="showSpinner"
+        style="margin: 0 auto;"
+        mode="indeterminate"
+        diameter="60"
+      ></mat-spinner>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-mb-12 col-sm-12 col-xs-12">
+        <div class="row clearfix b-shop_head">
+          <div class="col-xl-6 col-lg-6 col-mb-6 col-sm-6 col-xs-12">
+            <nav class="b-shop_breadcrumb">
+              <a href="#">Home</a>
+              <span> Shop</span>
+            </nav>
+          </div>
+        </div>
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="products.length == 0"
+        >
+          No products!
+        </div>
+        <div class="b-products b-product_grid b-product_grid_four mb-4">
+          <div class="row clearfix">
+            <div
+              class="col-xl-4 col-lg-4 col-mb-4 col-sm-6 col-xs-12"
+              *ngFor="let product of products"
+            >
+              <div class="b-product_grid_single">
+                <div class="b-product_grid_header">
+                  <a href="#">
+                    <img
+                      data-src="assets/images/products/"
+                      src="assets/images/products/{{ product.image }}"
+                      class="img-fluid img-switch d-block"
+                      alt=""
+                      style="width: 70%; height: 70%;"
+                    />
+                  </a>
+                </div>
+                <div class="b-product_grid_info">
+                  <h3 class="product-title">
+                    <a href="#"></a>
+                  </h3>
+                  <div class="clearfix">
+
+                    <div class="b-product_grid_toggle float-left">
+                      <span class="b-price" *ngIf="product.unit_price">{{product.unit_price}} &nbsp; D.T</span>
+                      <span class="b-price" *ngIf="!product.unit_price"></span>
+                      <span class="b-add_cart">
+                        <i class="icon-basket icons"></i>
+                        <a (click)="addCart(product.image)" style="cursor: pointer;"
+                          >Add to cart</a
+                        >
+                      </span>
+                      &nbsp;&nbsp;
+                      <span class="b-add_cart">
+                        <i class="icon-heart icons"></i>
+                        <a (click)="addWishlist(product.image)" style="cursor: pointer;"
+                          >Add to wishlist</a
+                        >
+                      </span>
+                    </div>
+                    <div class="b-product_options float-right" style="margin-right: 20%;">
+                      <ul class="pl-0 mb-0 list-unstyled">
+                          <li *ngIf="product.color == 'black'">
+                            <span data-toggle="tooltip" title="" class="b-black" data-original-title="Black"></span>
+                          </li>
+                          <li *ngIf="product.color == 'blue'">
+                            <span data-toggle="tooltip" title="" class="b-blue" data-original-title="Blue"></span>
+                          </li>
+                          <li *ngIf="product.color == 'red'">
+                            <span data-toggle="tooltip" title="" class="b-red" data-original-title="Red"></span>
+                          </li>
+                          <li *ngIf="product.color == 'grey'">
+                            <span data-toggle="tooltip" title="" class="b-grey" data-original-title="Grey"></span>
+                          </li>
+                          <li *ngIf="product.color == 'white'">
+                            <span data-toggle="tooltip" title="" class="b-white" data-original-title="White"></span>
+                          </li>
+                          <li *ngIf="product.color == 'brown'">
+                            <span data-toggle="tooltip" title="" class="b-brown" data-original-title="Brown"></span>
+                          </li>
+                          <li *ngIf="product.color == 'yellow'">
+                            <span data-toggle="tooltip" title="" class="b-yellow" data-original-title="Yellow"></span>
+                          </li>
+                          <li *ngIf="product.color == 'green'">
+                            <span data-toggle="tooltip" title="" class="b-green" data-original-title="Green"></span>
+                          </li>
+                          <li *ngIf="product.color == 'orange'">
+                            <span data-toggle="tooltip" title="" class="b-orange" data-original-title="orange"></span>
+                          </li>
+                      </ul>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+  <a href="javascript:;" id="b-scrollToTop" class="b-scrollToTop">
+    <span class="basel-tooltip-label">Scroll To Top</span>Scroll To Top
+  </a>
+  <app-search></app-search>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade product_view"
+  id="b-qucik_view"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button
+        type="button"
+        class="btn btn-close btn-secondary"
+        data-dismiss="modal"
+      >
+        <i class="icon-close icons"></i>
+      </button>
+      <div class="modal-body p-0">
+        <div class="row">
+          <div class="col-md-6 product_img">
+            <div class="owl-carousel owl-theme" id="b-product_pop_slider">
+              <div>
+                <img
+                  src="assets/images/accessories-01.jpg"
+                  class="img-fluid d-block m-auto"
+                />
+              </div>
+              <div>
+                <img
+                  src="assets/images/accessories-02.jpg"
+                  class="img-fluid d-block m-auto"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 product_content pr-5 pt-4">
+            <div class="b-product_single_summary">
+              <h1>Jhecked Bag</h1>
+              <p class="b-price">
+                <span class="b-amount">
+                  <span class="b-symbol">£</span>79.00</span
+                >
+              </p>
+              <div class="b-produt_description">
+                <p>
+                  Adipiscing vehicula amet in natoque lobortis mus velit dis
+                  vestibulum ullamcorper senectus conubia suspendisse vestibulum
+                  nam condimentum aliquet ipsum justo eu vestibulum sagittis.A
+                  vel vehicula a mi varius porta.
+                </p>
+              </div>
+              <div class="b-product_attr">
+                <div class="b-product_attr_single">
+                  <ul class="pl-0 list-unstyled clearfix">
+                    <li>
+                      <span class="b-product_attr_title pt-1">Color:</span>
+                    </li>
+                    <li>
+                      <a href="#"
+                        ><span
+                          data-toggle="tooltip"
+                          title=""
+                          data-original-title="Black"
+                          class="b-color_attr b-black"
+                        ></span
+                      ></a>
+                    </li>
+                    <li>
+                      <a href="#"
+                        ><span
+                          data-toggle="tooltip"
+                          title=""
+                          data-original-title="Red"
+                          class="b-color_attr b-red"
+                        ></span
+                      ></a>
+                    </li>
+                    <li>
+                      <a href="#"
+                        ><span
+                          data-toggle="tooltip"
+                          title=""
+                          data-original-title="Yellow"
+                          class="b-color_attr b-yellow"
+                        ></span
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="b-product_attr_single">
+                  <ul class="pl-0 list-unstyled clearfix">
+                    <li><span class="b-product_attr_title">Size:</span></li>
+                    <li>
+                      <a href="#"><span class="b-size_attr">L</span></a>
+                    </li>
+                    <li>
+                      <a href="#"><span class="b-size_attr">XL</span></a>
+                    </li>
+                    <li>
+                      <a href="#"><span class="b-size_attr">XXL</span></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="b-product_single_action clearfix">
+                <div class="b-quantity pull-left">
+                  <input type="button" value="-" class="b-minus" />
+                  <input
+                    type="text"
+                    step="1"
+                    min="1"
+                    max=""
+                    name="b-quantity"
+                    value="1"
+                    title="Qty"
+                    class="input-text qty text"
+                    size="4"
+                    pattern="[0-9]*"
+                    inputmode="numeric"
+                  />
+                  <input type="button" value="+" class="b-plus" />
+                </div>
+                <button class="text-uppercase pull-left btn">
+                  add to cart
+                </button>
+              </div>
+              <div class="b-product_single_option">
+                <ul class="pl-0 list-unstyled">
+                  <li><b class="text-uppercase">Sku</b>: N/A</li>
+                  <li><b>Category</b>: <a href="#">Man</a></li>
+                  <li>
+                    <b>Share</b>:
+                    <span class="b-share_product">
+                      <a href="#" class="fa fa-facebook"></a>
+                      <a href="#" class="fa fa-twitter"></a>
+                      <a href="#" class="fa fa-instagram"></a>
+                      <a href="#" class="fa fa-envelope"></a>
+                      <a href="#" class="fa fa-google-plus"></a>
+                      <a href="#" class="fa fa-pint"></a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- JQUERY:: JQUERY.JS -->
+<script src="assets/js/jquery.min.js"></script>
+
+<!-- JQUERY:: BOOTSTRAP.JS -->
+<script src="assets/js/tether.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- JQUERY:: OWL.JS -->
+<script src="assets/js/plugins/owl/owl.carousel.min.js"></script>
+
+<!-- JQUERY:: CUSTOM.JS -->
+<script src="assets/js/custom.js"></script>
