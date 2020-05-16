@@ -280,7 +280,7 @@ def cardnumber(request):
     if request.method=="POST":
         ocr_url = "https://textanaylser.cognitiveservices.azure.com/vision/v2.1/read/core/asyncBatchAnalyze"
         filestr = request.FILES['image'].read()
-        headers = {'Ocp-Apim-Subscription-Key': "e26840cd52074254b7a897ab28866213",'Content-Type': 'application/octet-stream'}
+        headers = {'Ocp-Apim-Subscription-Key': "3a7f9e778d2c4b898e3fe5228c86f3f1",'Content-Type': 'application/octet-stream'}
         params = {'language': 'unk', 'detectOrientation': 'true'}
         response = requests.post(ocr_url, headers=headers, data=filestr)
         response.raise_for_status()
