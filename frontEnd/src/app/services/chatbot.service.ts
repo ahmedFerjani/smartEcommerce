@@ -79,13 +79,18 @@ export class ChatbotService {
         this.messages.push(
           new Message(res.result.fulfillment.speech, 'replies', res.timestamp)
         );
-        console.log('messages' + this.messages);
         this.messagesUpdated.next({ messages: [...this.messages] });
-        if (<string>res.result.fulfillment.speech.search("we get that")) {
+        if (<number>res.result.fulfillment.speech.search("I get that") > -1) {
           this.gotoproducts(res.result.fulfillment.speech) ;
         }
+        else if (res.result.fulfillment.speech == "Done sir, you'll be redirected to the payment page") {
+          this.router.navigate(['/checkout']);
+        }
+        else if (res.result.fulfillment.speech == "Done sir, you're cart cleared")
+        {
+          localStorage.removeItem('products_cart')  ;
+        }
       }
-      //console.log(this.messages) ;
     });
   }
 }

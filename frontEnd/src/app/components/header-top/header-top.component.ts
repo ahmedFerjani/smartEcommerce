@@ -8,6 +8,9 @@ import * as $ from 'jquery';
 })
 export class HeaderTopComponent implements OnInit {
   constructor() {}
+  getEmail() {
+    return localStorage.getItem('email');
+  }
 
   ngOnInit(): void {
     $('#b-nav_icon').on('click', function (event) {

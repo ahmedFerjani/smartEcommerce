@@ -165,7 +165,9 @@ export class MyAccountComponent implements OnInit, AfterViewChecked {
     const facedata = new FormData();
     facedata.append('email', this.getEmail());
     facedata.append('image', file, file.name);
-    this.apiService.addAccountImage(facedata);
+    this.apiService.addAccountImage(facedata).subscribe((res) => {
+      this.openSnackBar('Image added to the user profile', 'ok');
+    });
   }
 
   imageFaceSelected(event: Event) {
@@ -175,11 +177,13 @@ export class MyAccountComponent implements OnInit, AfterViewChecked {
     faceData.append('image', file, 'face');
     this.apiService.recognize(faceData).subscribe(
       (res) => {
+        console.log(res);
         const credetialsForm = new FormData();
         credetialsForm.append('email', res.user.email);
         credetialsForm.append('password', res.user.password);
         this.apiService.login(credetialsForm);
         this.openSnackBar('Successfully logged in', 'ok');
+        localStorage.setItem('email', <any>credetialsForm.getAll('email'));
         this.showSpinner = false;
       },
       (err) => {

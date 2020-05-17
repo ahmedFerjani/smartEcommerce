@@ -39,7 +39,7 @@ export class ShopComponent implements OnInit {
     const products = JSON.parse(localStorage.getItem('products_cart') || '[]');
     products.push(product);
     localStorage.setItem('products_cart', JSON.stringify(products));
-    this.openSnackBar('Products added to the cart','ok'); 
+    this.openSnackBar('The product has been added to the cart','ok');
   }
 
   addWishlist(product: string) {
@@ -48,7 +48,7 @@ export class ShopComponent implements OnInit {
       products.push(product);
       localStorage.setItem('products_wish', JSON.stringify(products));
     }
-    this.openSnackBar('Product added to the wishlist','ok') ;
+    this.openSnackBar('The product has been added to your wishlist','ok') ;
   }
   setselectedimage() {
     this.selectedimageSub = this.apiService
@@ -72,7 +72,9 @@ export class ShopComponent implements OnInit {
               image: product
             })
           })
-          this.searchproducts=this.productss;
+          this.products = this.productss ;
+          this.productss= [] ;
+          this.searchproducts=this.products;
         }
         this.products=this.searchproducts ;
       });

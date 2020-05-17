@@ -28,14 +28,9 @@ export class ApiService {
     return this.http
       .post<{ message: string }>(
         'http://127.0.0.1:8000/login/',
-        // {a: planData.get('name'), }
         data
       )
-      // .subscribe((res) => {
-      //   if (res) {
-      //     localStorage.setItem('email', <any>data.getAll('email'));
-      //   }
-      // });
+
   }
 
   createUser(data: FormData) {
@@ -69,11 +64,9 @@ export class ApiService {
   }
 
   addAccountImage(data: FormData) {
-    this.http
+    return this.http
       .post<{ message: string[] }>('http://127.0.0.1:8000/addimage/', data)
-      .subscribe((res) => {
-        console.log(res);
-      });
+
   }
 
   searchProduct(data: FormData, filename: string) {
@@ -86,10 +79,12 @@ export class ApiService {
     this.http
       .post<{ message: string[] }>('http://127.0.0.1:8000/search/', data)
       .subscribe((responseData) => {
-        //console.log(responseData.message);
+        console.log(responseData.message);
         this.searchproductsUpdated.next({
           products: responseData.message,
         });
+        console.log(this.searchProduct.toString)
+
       });
   }
 

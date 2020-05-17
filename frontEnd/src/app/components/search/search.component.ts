@@ -68,7 +68,7 @@ export class SearchComponent implements OnInit {
   imageSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     const formdata = new FormData();
-    formdata.append('image', file, 'product');
+    formdata.append('image', file);
     this.apiService.searchProduct(formdata, file.name);
     this.router.navigate(['shop'], { queryParams: { category: 'search' } });
   }
