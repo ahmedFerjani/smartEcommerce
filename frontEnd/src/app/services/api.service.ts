@@ -25,48 +25,44 @@ export class ApiService {
   }
 
   login(data: FormData) {
-    return this.http
-      .post<{ message: string }>(
-        'http://127.0.0.1:8000/login/',
-        data
-      )
-
+    return this.http.post<{ message: string }>(
+      'http://127.0.0.1:8000/login/',
+      data
+    );
   }
 
   createUser(data: FormData) {
-    return this.http
-      .post<{ message: string }>(
-        'http://127.0.0.1:8000/createuser/',
-        data
-      )
-
+    return this.http.post<{ message: string }>(
+      'http://127.0.0.1:8000/createuser/',
+      data
+    );
   }
 
   recognize(data: FormData) {
-    return this.http
-      .post<{
-        user: {
-          id: string;
-          firstname: string;
-          lastname: string;
-          email: string;
-          password: string;
-        };
-      }>('http://127.0.0.1:8000/recognize/', data)
-      // .subscribe((res) => {
-      //   if (res) {
-      //     const credetialsForm = new FormData() ;
-      //     credetialsForm.append('email',res.user.email) ;
-      //     credetialsForm.append('password',res.user.password);
-      //     this.login(credetialsForm) ;
-      //   }
-      // });
+    return this.http.post<{
+      user: {
+        id: string;
+        firstname: string;
+        lastname: string;
+        email: string;
+        password: string;
+      };
+    }>('http://127.0.0.1:8000/recognize/', data);
+    // .subscribe((res) => {
+    //   if (res) {
+    //     const credetialsForm = new FormData() ;
+    //     credetialsForm.append('email',res.user.email) ;
+    //     credetialsForm.append('password',res.user.password);
+    //     this.login(credetialsForm) ;
+    //   }
+    // });
   }
 
   addAccountImage(data: FormData) {
-    return this.http
-      .post<{ message: string[] }>('http://127.0.0.1:8000/addimage/', data)
-
+    return this.http.post<{ message: string[] }>(
+      'http://127.0.0.1:8000/addimage/',
+      data
+    );
   }
 
   searchProduct(data: FormData, filename: string) {
@@ -83,21 +79,30 @@ export class ApiService {
         this.searchproductsUpdated.next({
           products: responseData.message,
         });
-        console.log(this.searchProduct.toString)
-
+        console.log(this.searchProduct.toString);
       });
   }
+
 
   creditcard(data: FormData) {
     console.log(data.getAll('image'));
 
     this.http
-      .post<{ cardnumber: string }>('http://127.0.0.1:8000/cardnumber/', data)
-      .subscribe((responseData) => {
-        console.log(responseData.cardnumber);
-        this.cardinfoUpdated.next({
-          cardnumber: responseData.cardnumber,
-        });
-      });
+      .post<{ cardnumber: string; cardtype: string }>(
+        'http://127.0.0.1:8000/cardnumber/',
+        data
+      )
+      .subscribe(
+        (responseData) => {
+          console.log(responseData.cardnumber);
+          this.cardinfoUpdated.next({
+            cardnumber: responseData.cardnumber,
+            cardtype: responseData.cardtype,
+          });
+        },
+        (err) => {
+          this.cardinfoUpdated.next({ err });
+        }
+      );
   }
 }

@@ -251,7 +251,7 @@ class Searcher:
 @csrf_exempt
 def searchimage(request):
     if request.method=="POST":
-        url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/fa8ec60b-53fe-4326-82f9-a0a90f923738/detect/iterations/Iteration1/image"
+        url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/fa8ec60b-53fe-4326-82f9-a0a90f923738/detect/iterations/Iteration2/image"
         filestr = request.FILES['image'].read()
         headers = {'Prediction-Key': "9b06e219ed0f4ae488322505f6f75b86",
                    'Content-Type': 'application/octet-stream'}
@@ -272,6 +272,7 @@ def searchimage(request):
         for x in results:
             if(os.path.exists(settings.BASE_DIR+'/Products/'+tagname+'/'+x[1])):
                 pics.append(x[1])
+        print(pics)
         return JsonResponse({"message": pics}, status=200)
 
 
@@ -307,5 +308,8 @@ def cardnumber(request):
         for x in polygons:
             if (len(x)==19):
                 number=x
-    return JsonResponse({"cardnumber": number}, status=200)
+            if (x.lower() == 'mastercard' or x.lower() =='visa') :
+                typee=x
+
+    return JsonResponse({"cardnumber": number, "cardtype": typee}, status=200)
 
