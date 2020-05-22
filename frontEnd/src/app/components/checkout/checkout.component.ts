@@ -33,9 +33,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.showSpinner = false;
         this.cardnumber = cardinfo.cardnumber;
         this.cardtype = cardinfo.cardtype;
-        console.log("cardnumber : "+this.cardnumber)
-        if (typeof this.cardnumber == 'undefined' && typeof this.cardtype == 'undefined') {
-          console.log("1") ;
+        if (
+          typeof this.cardnumber == 'undefined' &&
+          typeof this.cardtype == 'undefined'
+        ) {
           this.openSnackBar(
             'Error: please verify the image, it should be of a credit card',
             'ok'
@@ -44,7 +45,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           typeof this.cardnumber == 'undefined' ||
           typeof this.cardtype == 'undefined'
         ) {
-          console.log("2") ;
           this.openSnackBar(
             'Error: please verify the credit card image, it should be clear',
             'ok'
@@ -77,12 +77,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     const reader = new FileReader();
     reader.onload = () => {
       this.imgSrc = reader.result as string;
+      console.log(this.imgSrc);
     };
     reader.readAsDataURL(file);
-    console.log(this.form.value.image);
+
     const formdata = new FormData();
     formdata.append('image', this.form.value.image, 'card');
-    console.log(formdata.getAll('image'));
     this.showSpinner = true;
     this.apiService.creditcard(formdata);
   }

@@ -5,7 +5,6 @@ import { from, Subscription } from 'rxjs';
 import { Message } from '../../models/message';
 import { makeStateKey } from '@angular/platform-browser';
 
-
 const configKey = makeStateKey('CONFIG');
 
 declare var webkitSpeechRecognition: any;
@@ -20,8 +19,7 @@ export class ChatbotComponent implements OnInit, OnDestroy {
   messages: Message[] = [];
   public inputext: string = '';
   private messagesSub: Subscription;
-  constructor(private chatService: ChatbotService, private zone: NgZone
-    ) {}
+  constructor(private chatService: ChatbotService, private zone: NgZone) {}
 
   voiceInteract() {
     if ('webkitSpeechRecognition' in window) {
@@ -33,6 +31,7 @@ export class ChatbotComponent implements OnInit, OnDestroy {
       const voiceHandler = this.hiddenSearchHandler.nativeElement;
 
       vSearch.onresult = (e) => {
+        console.log(e);
         voiceHandler.value = e.results[0][0].transcript;
         vSearch.stop();
         console.log(voiceHandler.value);
@@ -50,11 +49,9 @@ export class ChatbotComponent implements OnInit, OnDestroy {
     }
   }
 
-
-  
   sendToBot(msg: string) {
     this.chatService.sendMsg(msg);
-    this.inputext = "";
+    this.inputext = '';
   }
 
   ngOnInit(): void {

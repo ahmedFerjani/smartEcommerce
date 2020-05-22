@@ -22,7 +22,11 @@
         <div class="Messages">
           <li *ngFor="let message of messages" class="{{ message.avatar }}">
             <img src="../../../assets/images/{{ message.avatar }}.png" alt="" />
-            <p>{{ message.content }}</p>
+            <p>
+
+              {{ message.content }}
+              <span style="font-size: 0.7em;">{{ message.timestamp | getTime }}</span>
+            </p>
           </li>
         </div>
         <div class="Input Input-blank">
@@ -34,23 +38,25 @@
             (keydown.enter)="sendButton.click()"
             [(ngModel)]="inputext"
           ></textarea>
-          <button class="Input_button Input_button-send" style="margin-right: 30px; margin-bottom: 5px;" (click)="voiceInteract()">
-
-
-          <div class="Icon" style="width: 18px; height: 18px;">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24px"
-              height="24px"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 2c1.103 0 2 .897 2 2v7c0 1.103-.897 2-2 2s-2-.897-2-2v-7c0-1.103.897-2 2-2zm0-2c-2.209 0-4 1.791-4 4v7c0 2.209 1.791 4 4 4s4-1.791 4-4v-7c0-2.209-1.791-4-4-4zm8 9v2c0 4.418-3.582 8-8 8s-8-3.582-8-8v-2h2v2c0 3.309 2.691 6 6 6s6-2.691 6-6v-2h2zm-7 13v-2h-2v2h-4v2h10v-2h-4z"
-              />
-            </svg>
-          </div>
-        </button>
-        <input #searchKey name="q" id="searchKey" type="hidden">
+          <button
+            class="Input_button Input_button-send"
+            style="margin-right: 30px; margin-bottom: 5px;"
+            (click)="voiceInteract()"
+          >
+            <div class="Icon" style="width: 18px; height: 18px;">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24px"
+                height="24px"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2c1.103 0 2 .897 2 2v7c0 1.103-.897 2-2 2s-2-.897-2-2v-7c0-1.103.897-2 2-2zm0-2c-2.209 0-4 1.791-4 4v7c0 2.209 1.791 4 4 4s4-1.791 4-4v-7c0-2.209-1.791-4-4-4zm8 9v2c0 4.418-3.582 8-8 8s-8-3.582-8-8v-2h2v2c0 3.309 2.691 6 6 6s6-2.691 6-6v-2h2zm-7 13v-2h-2v2h-4v2h10v-2h-4z"
+                />
+              </svg>
+            </div>
+          </button>
+          <input #searchKey name="q" id="searchKey" type="hidden" />
 
           <button
             class="Input_button Input_button-send"

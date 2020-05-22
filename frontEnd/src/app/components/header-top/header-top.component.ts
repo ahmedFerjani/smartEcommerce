@@ -13,6 +13,9 @@ export class HeaderTopComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+
     $('#b-nav_icon').on('click', function (event) {
       $('body').toggleClass('mobile-menu-open');
       return false;

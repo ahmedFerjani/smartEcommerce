@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.core.mail import send_mail
 from imutils import paths
 import face_recognition
 import argparse
@@ -7,6 +7,7 @@ import pickle
 import numpy as np
 import cv2
 import csv
+import shutil
 import requests
 import imutils
 from django.http import HttpResponse
@@ -48,6 +49,63 @@ def createuser(request):
             return JsonResponse({"message":"Can't create user"}, status=500)
 
 
+@csrf_exempt
+def test(request):
+    f = open(settings.BASE_DIR+"/webapp/encoding.pkl", "rb")
+    try:
+        data = pickle.load(f)
+        encodings=data['encodings']
+        names=data['names']
+    except:
+        encodings=[]
+        names=[]
+    print(data)
+
+@csrf_exempt
+def deleteuser(request,email):
+    operation = client.objects.filter(email=email).delete()
+    if operation[0]==1:
+        if (os.path.exists(settings.BASE_DIR+'/images/'+email)):
+            shutil.rmtree(settings.BASE_DIR+'/images/'+email)
+    else:
+        return JsonResponse({"message":"user can't be found"}, status=500)
+    f = open(settings.BASE_DIR+"/webapp/encoding.pkl", "rb")
+    try:
+        data = pickle.load(f)
+        encodings=data['encodings']
+        names=data['names']
+    except:
+        encodings=[]
+        names=[]
+    namess=[] 
+    encodingss=[]
+    for name,encoding in zip(names,encodings):
+        if(name!=email):
+            namess.append(name) 
+            encodingss.append(encoding)
+    data = {"encodings": encodingss, "names": namess}
+    f = open(settings.BASE_DIR+"/webapp/encoding.pkl", "wb")
+    f.write(pickle.dumps(data))
+    f.close()
+    return JsonResponse({"message":"User successfully deleted"}, status=200)
+
+
+
+@csrf_exempt
+def sendemail(request):
+    if request.method == "POST":
+        print("inside send")
+        try:
+            subject = request.POST.get('subject')
+            content = request.POST.get("content")
+            #source = request.POST.get("source")
+            dest = "projectaishopsmart@gmail.com"
+            send_mail(subject,content,"",[dest],fail_silently=False,)
+        except Exception as e:
+            print(e)
+            return JsonResponse({"message":"error: cant's send the mail"},status=500)
+        return JsonResponse({"message":"we have received your mail"}, status=200)
+
 
 @csrf_exempt
 def userinfo(request):
@@ -79,7 +137,10 @@ def AddImage(request):
     if request.method=="POST":
         if (os.path.exists(settings.BASE_DIR+'/images/'+request.POST.get('email'))):
             file = request.FILES['image']
+            if(not str(request.FILES['image']).find('jpg')) :
+                return JsonResponse({"message": "we accept only image files"}, status=500)
             if(  os.path.exists(settings.BASE_DIR+'/images/'+request.POST.get('email')+'/'+file.name) ):
+                print("error") ; 
                 return JsonResponse({"message": "image already exists"}, status=500)
             else:
                 path = default_storage.save(settings.BASE_DIR+'/images/'+request.POST.get('email')+'/'+file.name, ContentFile(file.read()))
@@ -120,8 +181,11 @@ def AddImage(request):
 
         print("[INFO] serializing encodings...")
         data = {"encodings": encodings, "names": names}
-        #f = open("C:/Users/DELL/PycharmProjects/DjangoRest/myproject/webapp/encoding.pkl", "wb")
         f = open(settings.BASE_DIR+"/webapp/encoding.pkl", "wb")
+        print('**encoding of picture**') ; 
+        print(data) ; 
+        print('**encoding of picture**')
+
         f.write(pickle.dumps(data))
         f.close()
         return JsonResponse({"message": "image added"}, status=201)
@@ -132,7 +196,6 @@ def Recognize(request):
     if request.method=="POST":
         #file=request.FILES['image']
         print("[INFO] loading encodings...")
-        #data = pickle.loads(open("C:/Users/DELL/PycharmProjects/DjangoRest/myproject/webapp/encoding.pkl", "rb").read())
         data = pickle.loads(open(settings.BASE_DIR+"/webapp/encoding.pkl", "rb").read())
         # load the input image and convert it from BGR to RGB
         filestr = request.FILES['image'].read()

@@ -9,7 +9,6 @@ export class ApiService {
   private cardinfoUpdated = new Subject();
   private searchproductsUpdated = new Subject();
   private seletedimageUpdated = new Subject();
-
   constructor(private http: HttpClient) {}
 
   getcardinfoListener() {
@@ -65,13 +64,13 @@ export class ApiService {
     );
   }
 
-  searchProduct(data: FormData, filename: string) {
-    //console.log("data") ;
-    //console.log(data.getAll('image'));
-    console.log(filename);
+  searchProduct(data: FormData, filename: string, file: File) {
+    console.log('data');
+    console.log(data.getAll('image'));
     this.seletedimageUpdated.next({
-      selectedimage: filename,
+      selectedimagefile : file,
     });
+    
     this.http
       .post<{ message: string[] }>('http://127.0.0.1:8000/search/', data)
       .subscribe((responseData) => {
@@ -82,7 +81,6 @@ export class ApiService {
         console.log(this.searchProduct.toString);
       });
   }
-
 
   creditcard(data: FormData) {
     console.log(data.getAll('image'));

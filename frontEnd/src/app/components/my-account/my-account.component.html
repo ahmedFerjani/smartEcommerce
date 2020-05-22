@@ -36,14 +36,14 @@
                   </div>
                   <div class="pb-2">
                     <button (click)="capture()">
-                      Capture Image
+                      Login
                     </button>
                   </div>
                   <div>
-                    <canvas #canvas class="vid" id="canvas"></canvas>
+                    <canvas #canvas class="vid" id="canvas" ></canvas>
                   </div>
                 </div>
-                <h1>Then upload your image</h1>
+                <!-- <h1>Then upload your image</h1>
                 <img
                   src="../../../assets/images/photography.png"
                   alt=""
@@ -60,10 +60,10 @@
                   id=""
                   style="visibility: hidden;"
                   (change)="imageFaceSelected($event)"
-                />
+                /> -->
                 <mat-spinner
                   *ngIf="showSpinner"
-                  style="margin: 0 auto;"
+                  style="margin: 0 auto; margin-top: 10px;"
                   mode="indeterminate"
                   diameter="60"
                 ></mat-spinner>
@@ -210,6 +210,60 @@
         <button mat-flat-button color="primary" (click)="uploadImage.click()">
           <mat-icon>face</mat-icon> Upload new image
         </button>
+        <button
+          mat-flat-button
+          color="accent"
+          style="margin-left: 20px;"
+          data-toggle="modal"
+          data-target="#delete_modal"
+        >
+          <mat-icon>clear</mat-icon> Delete my account
+        </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="delete_modal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Do you really want to delete your account ?
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  No
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                  (click)="deleteAccount()"
+                >
+                  Yes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </mat-card-actions>
     </mat-card>
 

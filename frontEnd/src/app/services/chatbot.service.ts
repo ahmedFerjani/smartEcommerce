@@ -73,22 +73,32 @@ export class ChatbotService {
     });
     let options = { headers: headers };
     this.messages.push(new Message(msg, 'sent', new Date()));
+    console.log(
+      new Date().getHours() +
+        ':' +
+        new Date().getMinutes() +
+        ' : ' +
+        new Date().getSeconds()
+    );
     this.messagesUpdated.next({ messages: [...this.messages] });
     return this.http.post(this.baseURL, data, options).subscribe((res: any) => {
       if (res) {
+        console.log(res);
         this.messages.push(
           new Message(res.result.fulfillment.speech, 'replies', res.timestamp)
         );
         this.messagesUpdated.next({ messages: [...this.messages] });
-        if (<number>res.result.fulfillment.speech.search("I get that") > -1) {
-          this.gotoproducts(res.result.fulfillment.speech) ;
-        }
-        else if (res.result.fulfillment.speech == "Done sir, you'll be redirected to the payment page") {
+        if (<number>res.result.fulfillment.speech.search('I get that') > -1) {
+          this.gotoproducts(res.result.fulfillment.speech);
+        } else if (
+          res.result.fulfillment.speech ==
+          "Done sir, you'll be redirected to the payment page"
+        ) {
           this.router.navigate(['/checkout']);
-        }
-        else if (res.result.fulfillment.speech == "Done sir, you're cart cleared")
-        {
-          localStorage.removeItem('products_cart')  ;
+        } else if (
+          res.result.fulfillment.speech == "Done sir, you're cart cleared"
+        ) {
+          localStorage.removeItem('products_cart');
         }
       }
     });

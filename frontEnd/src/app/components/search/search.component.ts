@@ -19,7 +19,7 @@ export class SearchComponent implements OnInit {
   constructor(
     private router: Router,
     private apiService: ApiService,
-    private zone: NgZone,
+    private zone: NgZone
   ) {}
 
   searchByText(text: string) {
@@ -63,13 +63,36 @@ export class SearchComponent implements OnInit {
     console.log('Category : ' + category + ' Color : ' + color);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    $('#b-search_toggle').on('click', function () {
+      var head_height = $('header').height();
+      var window_height = $(window).height();
+      var popup_height = window_height - head_height;
+      $(this).find('i').toggleClass('icon-magnifier');
+      $(this).find('i').toggleClass('icon-magnifier-remove');
+      if ($('body').hasClass('b-search_open')) {
+        $('.b-search_popup').css('top', '');
+        $('.b-search_popup').css('height', '');
+      } else {
+        $('.b-search_popup').css('top', head_height);
+        $('.b-search_popup').css('height', popup_height);
+      }
+      $('body').toggleClass('b-search_open');
+    });
+    $('#b-close_search').on('click', function () {
+      $('#b-search_toggle i').addClass('icon-magnifier');
+      $('#b-search_toggle i').removeClass('icon-magnifier-remove');
+      $('.b-search_popup').css('top', '');
+      $('.b-search_popup').css('height', '');
+      $('body').removeClass('b-search_open');
+    });
+  }
 
   imageSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     const formdata = new FormData();
     formdata.append('image', file);
-    this.apiService.searchProduct(formdata, file.name);
+    this.apiService.searchProduct(formdata, file.name, file);
     this.router.navigate(['shop'], { queryParams: { category: 'search' } });
   }
 
@@ -83,6 +106,7 @@ export class SearchComponent implements OnInit {
       const voiceHandler = this.hiddenSearchHandler.nativeElement;
 
       vSearch.onresult = (e) => {
+
         voiceHandler.value = e.results[0][0].transcript;
         vSearch.stop();
         console.log(voiceHandler.value);

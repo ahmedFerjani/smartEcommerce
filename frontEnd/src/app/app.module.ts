@@ -26,8 +26,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { GetTimePipe } from './pipes/get-time.pipe';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     SearchComponent,
     ShopComponent,
     ChatbotComponent,
+    GetTimePipe,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTabsModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatBadgeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

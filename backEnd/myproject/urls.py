@@ -33,4 +33,8 @@ urlpatterns = [
     url(r'^cardnumber/', views.cardnumber),
     url(r'^userinfo/', views.userinfo),
     url(r'^createuser/', views.createuser),
+    url(r'^deleteuser/(?P<email>.*)/$', views.deleteuser),
+    url(r'^sendemail/', views.sendemail),
+    url(r'^test/', views.test),
+
 ]

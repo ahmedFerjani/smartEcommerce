@@ -72,12 +72,23 @@
   >
     <div class="col-sm-12">
       <h1>Selected image for search :</h1>
-      <img
+      <!-- <img
         src="assets/images/products/{{ selectedimage }}"
         alt="selected image"
         height="10%"
         width="10%"
+      /> -->
+      <div
+      *ngIf="imgSrc !== '' && imgSrc"
+      style="text-align: center;"
+    >
+      <img
+        [src]="imgSrc"
+        alt="Credit card image"
+        height="10%"
+        width="10%"
       />
+    </div>
       <br />
       <mat-spinner
         *ngIf="showSpinner"
@@ -128,55 +139,116 @@
                     <a href="#"></a>
                   </h3>
                   <div class="clearfix">
-
                     <div class="b-product_grid_toggle float-left">
-                      <span class="b-price" *ngIf="product.unit_price">{{product.unit_price}} &nbsp; D.T</span>
+                      <span class="b-price" *ngIf="product.unit_price"
+                        >{{ product.unit_price }} &nbsp; D.T</span
+                      >
                       <span class="b-price" *ngIf="!product.unit_price"></span>
                       <span class="b-add_cart">
                         <i class="icon-basket icons"></i>
-                        <a (click)="addCart(product.image)" style="cursor: pointer;"
+                        <a
+                          (click)="addCart(product.image)"
+                          style="cursor: pointer;"
                           >Add to cart</a
                         >
                       </span>
                       &nbsp;&nbsp;
                       <span class="b-add_cart">
                         <i class="icon-heart icons"></i>
-                        <a (click)="addWishlist(product.image)" style="cursor: pointer;"
+                        <a
+                          (click)="addWishlist(product.image)"
+                          style="cursor: pointer;"
                           >Add to wishlist</a
                         >
                       </span>
                     </div>
-                    <div class="b-product_options float-right" style="margin-right: 20%;">
+                    <div
+                      class="b-product_options float-right"
+                      style="margin-right: 20%;"
+                    >
                       <ul class="pl-0 mb-0 list-unstyled">
-                          <li *ngIf="product.color == 'black'">
-                            <span data-toggle="tooltip" title="" class="b-black" data-original-title="Black"></span>
-                          </li>
-                          <li *ngIf="product.color == 'blue'">
-                            <span data-toggle="tooltip" title="" class="b-blue" data-original-title="Blue"></span>
-                          </li>
-                          <li *ngIf="product.color == 'red'">
-                            <span data-toggle="tooltip" title="" class="b-red" data-original-title="Red"></span>
-                          </li>
-                          <li *ngIf="product.color == 'grey'">
-                            <span data-toggle="tooltip" title="" class="b-grey" data-original-title="Grey"></span>
-                          </li>
-                          <li *ngIf="product.color == 'white'">
-                            <span data-toggle="tooltip" title="" class="b-white" data-original-title="White"></span>
-                          </li>
-                          <li *ngIf="product.color == 'brown'">
-                            <span data-toggle="tooltip" title="" class="b-brown" data-original-title="Brown"></span>
-                          </li>
-                          <li *ngIf="product.color == 'yellow'">
-                            <span data-toggle="tooltip" title="" class="b-yellow" data-original-title="Yellow"></span>
-                          </li>
-                          <li *ngIf="product.color == 'green'">
-                            <span data-toggle="tooltip" title="" class="b-green" data-original-title="Green"></span>
-                          </li>
-                          <li *ngIf="product.color == 'orange'">
-                            <span data-toggle="tooltip" title="" class="b-orange" data-original-title="orange"></span>
-                          </li>
+                        <li *ngIf="product.color == 'black'">
+                          <span
+                            data-toggle="tooltip"
+                            title=""
+                            class="b-black"
+                            data-original-title="Black"
+                          ></span>
+                        </li>
+                        <li *ngIf="product.color == 'blue'">
+                          <span
+                            data-toggle="tooltip"
+                            title=""
+                            class="b-blue"
+                            data-original-title="Blue"
+                          ></span>
+                        </li>
+                        <li *ngIf="product.color == 'red'">
+                          <span
+                            data-toggle="tooltip"
+                            title=""
+                            class="b-red"
+                            data-original-title="Red"
+                          ></span>
+                        </li>
+                        <li *ngIf="product.color == 'grey'">
+                          <span
+                            data-toggle="tooltip"
+                            title=""
+                            class="b-grey"
+                            data-original-title="Grey"
+                          ></span>
+                        </li>
+                        <li *ngIf="product.color == 'white'">
+                          <span
+                            data-toggle="tooltip"
+                            title=""
+                            class="b-white"
+                            data-original-title="White"
+                          ></span>
+                        </li>
+                        <li *ngIf="product.color == 'brown'">
+                          <span
+                            data-toggle="tooltip"
+                            title=""
+                            class="b-brown"
+                            data-original-title="Brown"
+                          ></span>
+                        </li>
+                        <li *ngIf="product.color == 'yellow'">
+                          <span
+                            data-toggle="tooltip"
+                            title=""
+                            class="b-yellow"
+                            data-original-title="Yellow"
+                          ></span>
+                        </li>
+                        <li *ngIf="product.color == 'green'">
+                          <span
+                            data-toggle="tooltip"
+                            title=""
+                            class="b-green"
+                            data-original-title="Green"
+                          ></span>
+                        </li>
+                        <li *ngIf="product.color == 'orange'">
+                          <span
+                            data-toggle="tooltip"
+                            title=""
+                            class="b-orange"
+                            data-original-title="orange"
+                          ></span>
+                        </li>
+                        <li *ngIf="product.color == 'pink'">
+                          <span
+                            data-toggle="tooltip"
+                            title=""
+                            class="b-pink"
+                            data-original-title="pink"
+                          ></span>
+                        </li>
                       </ul>
-                  </div>
+                    </div>
                   </div>
                 </div>
               </div>

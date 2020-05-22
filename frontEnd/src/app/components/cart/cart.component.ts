@@ -23,7 +23,7 @@ export class CartComponent implements OnInit {
     localStorage.setItem('products_cart', JSON.stringify(productss));
   }
 
-  
+
   getQuantity(product_cart:string) {
     const products = JSON.parse(localStorage.getItem('products_cart') || '[]');
     return products.filter(x => x === product_cart).length
@@ -31,6 +31,7 @@ export class CartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

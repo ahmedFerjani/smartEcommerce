@@ -2,83 +2,73 @@
 
 <div class="b-wrapper">
   <app-header></app-header>
+  <form [formGroup]="contactForm">
+    <div class="b-contact b-contact_light pt-5 mt-4">
+      <div class="container">
+        <div class="row clearfix">
+          <div class="col-xl-6 col-lg-6 col-mb-6 col-sm-12 col-xs-12">
+            <div class="b-title b-title_line_right">
+              <h2 class="text-uppercase">get in touch with us</h2>
+            </div>
+            <div class="clearfix row">
+              <div class="col-xl-12 col-lg-12 col-mb-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <label>Subject</label>
+                  <input type="text" formControlName="subject" id="subject" />
+                </div>
+              </div>
+              <div class="col-xl-12 col-lg-12 col-mb-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <label>Your Message</label>
+                  <div style="text-align: center;">
+                    <button
+                      mat-mini-fab
+                      color="primary"
+                      (click)="voiceInteract()"
+                      aria-label="Example icon button with a delete icon"
+                    >
+                      <mat-icon>mic</mat-icon>
+                    </button>
 
-  <div class="b-contact b-contact_light pt-5 mt-4">
-    <div class="container">
-      <div class="row clearfix">
-        <div class="col-xl-6 col-lg-6 col-mb-6 col-sm-12 col-xs-12">
-          <div class="b-title b-title_line_right">
-            <h2 class="text-uppercase">get in touch with us</h2>
-          </div>
-          <div class="clearfix row">
-            <div class="col-xl-6 col-lg-6 col-mb-6 col-sm-12 col-xs-12">
-              <div class="form-group">
-                <label
-                  >Your Name <i style="color: red;">*</i>
-                  <span id="userName-info" class="info"></span
-                ></label>
-                <input required="" type="text" name="userName" id="userName" />
-              </div>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-mb-6 col-sm-12 col-xs-12">
-              <div class="form-group">
-                <label
-                  >Your Email <i style="color: red;">*</i>
-                  <span id="userEmail-info" class="info"></span
-                ></label>
-                <input
-                  required=""
-                  type="email"
-                  name="userEmail"
-                  id="userEmail"
-                />
-              </div>
-            </div>
-            <div class="col-xl-12 col-lg-12 col-mb-12 col-sm-12 col-xs-12">
-              <div class="form-group">
-                <label>Subject</label>
-                <input type="text" name="subject" id="subject" />
-              </div>
-            </div>
-            <div class="col-xl-12 col-lg-12 col-mb-12 col-sm-12 col-xs-12">
-              <div class="form-group">
-                <label>Your Message</label>
-                <textarea name="content" id="content"></textarea>
-              </div>
-            </div>
-            <div class="col-xl-12 col-lg-12 col-mb-12 col-sm-12 col-xs-12">
-              <button onClick="sendContact();" class="btn btn-bg text-white">
-                SEND A MESSAGE
-              </button>
-            </div>
-          </div>
-          <div class="mt-4" id="mail-status"></div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-mb-6 col-sm-12 col-xs-12">
-          <div class="b-title b-title_line_righ mt-5 mt-lg -0">
-            <h2 class="text-uppercase">Want to discover our latest work ?</h2>
-          </div>
-          <div class="clearfix mb-5">
-            <p class="pull-left mb-0">
-              <i
-              class="fa fa-github fa-lg"
-            ></i> Ahmed Ferjani:  @ahmedFerjani <br />
-            <i
-            class="fa fa-github fa-lg"
-          ></i>  Sofiene Achour: @achsofiene10
-            </p>
-          </div>
+                    <input #searchKeyy name="q" id="searchKeyy" type="hidden" />
+                  </div>
 
+                  <br />
+                  <textarea formControlName="content" id="content"></textarea>
+                </div>
+              </div>
+              <div class="col-xl-12 col-lg-12 col-mb-12 col-sm-12 col-xs-12">
+                <button
+                  (click)="onSaveFormContact()"
+                  class="btn btn-bg text-white"
+                >
+                  SEND A MESSAGE
+                </button>
+              </div>
+            </div>
+            <div class="mt-4" id="mail-status"></div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-mb-6 col-sm-12 col-xs-12">
+            <div class="b-title b-title_line_righ mt-5 mt-lg -0">
+              <h2 class="text-uppercase">Want to discover our latest work ?</h2>
+            </div>
+            <div class="clearfix mb-5">
+              <p class="pull-left mb-0">
+                <i class="fa fa-github fa-lg"></i> Ahmed Ferjani: @ahmedFerjani
+                <br />
+                <i class="fa fa-github fa-lg"></i> Sofiene Achour: @achsofiene10
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
   <app-footer></app-footer>
   <a href="javascript:;" id="b-scrollToTop" class="b-scrollToTop">
     <span class="basel-tooltip-label">Scroll To Top</span>Scroll To Top
   </a>
   <app-search></app-search>
-
 </div>
 <!-- JQUERY:: JQUERY.JS -->
 <script src="assets/js/jquery.min.js"></script>

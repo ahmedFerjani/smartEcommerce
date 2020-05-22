@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-my-account',
@@ -43,8 +44,13 @@ export class MyAccountComponent implements OnInit, AfterViewChecked {
     private router: Router,
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private accountService: AccountService
   ) {}
+
+  deleteAccount() {
+    this.accountService.deleteUser(this.getEmail());
+  }
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -93,8 +99,47 @@ export class MyAccountComponent implements OnInit, AfterViewChecked {
     this.canvas.nativeElement
       .getContext('2d')
       .drawImage(this.videoElement.nativeElement, 0, 0);
+    this.loginFace(document.getElementById('canvas'));
+    //this.saveCanvasAs(document.getElementById('canvas'), 'export.png');
+  }
 
-    this.saveCanvasAs(document.getElementById('canvas'), 'export.png');
+  urltoFile(url, filename, mimeType) {
+    return fetch(url)
+      .then(function (res) {
+        return res.arrayBuffer();
+      })
+      .then(function (buf) {
+        return new File([buf], filename, { type: mimeType });
+      });
+  }
+
+  loginFace(selectedFace: any) {
+    console.log(selectedFace.toDataURL());
+    console.log('hello');
+    this.urltoFile(selectedFace.toDataURL(), 'camimage', 'image/png').then(
+      (image_file) => {
+        this.showSpinner = true;
+        const file = image_file;
+        const faceData = new FormData();
+        faceData.append('image', file, 'face');
+        this.apiService.recognize(faceData).subscribe(
+          (res) => {
+            console.log(res);
+            const credetialsForm = new FormData();
+            credetialsForm.append('email', res.user.email);
+            credetialsForm.append('password', res.user.password);
+            this.apiService.login(credetialsForm);
+            this.openSnackBar('Successfully logged in', 'ok');
+            localStorage.setItem('email', <any>credetialsForm.getAll('email'));
+            this.showSpinner = false;
+          },
+          (err) => {
+            this.openSnackBar('Error: Failed to login, please try again', 'ok');
+            this.showSpinner = false;
+          }
+        );
+      }
+    );
   }
 
   saveCanvasAs(canvas, fileName) {
@@ -139,8 +184,7 @@ export class MyAccountComponent implements OnInit, AfterViewChecked {
   }
 
   logout() {
-    //localStorage.removeItem('email');
-    localStorage.clear();
+    this.accountService.logout();
   }
 
   onSaveFormLogin() {
@@ -165,35 +209,41 @@ export class MyAccountComponent implements OnInit, AfterViewChecked {
     const facedata = new FormData();
     facedata.append('email', this.getEmail());
     facedata.append('image', file, file.name);
-    this.apiService.addAccountImage(facedata).subscribe((res) => {
-      this.openSnackBar('Image added to the user profile', 'ok');
-    });
-  }
-
-  imageFaceSelected(event: Event) {
-    this.showSpinner = true;
-    const file = (event.target as HTMLInputElement).files[0];
-    const faceData = new FormData();
-    faceData.append('image', file, 'face');
-    this.apiService.recognize(faceData).subscribe(
+    this.apiService.addAccountImage(facedata).subscribe(
       (res) => {
-        console.log(res);
-        const credetialsForm = new FormData();
-        credetialsForm.append('email', res.user.email);
-        credetialsForm.append('password', res.user.password);
-        this.apiService.login(credetialsForm);
-        this.openSnackBar('Successfully logged in', 'ok');
-        localStorage.setItem('email', <any>credetialsForm.getAll('email'));
-        this.showSpinner = false;
+        this.openSnackBar('Image added to the user profile', 'ok');
       },
-      (err) => {
-        this.openSnackBar('Error: Failed to login, please try again', 'ok');
-        this.showSpinner = false;
+      (res) => {
+        this.openSnackBar(res.error.message, 'ok');
       }
     );
   }
 
+  // imageFaceSelected(event: Event) {
+  //   this.showSpinner = true;
+  //   const file = (event.target as HTMLInputElement).files[0];
+  //   const faceData = new FormData();
+  //   faceData.append('image', file, 'face');
+  //   this.apiService.recognize(faceData).subscribe(
+  //     (res) => {
+  //       console.log(res);
+  //       const credetialsForm = new FormData();
+  //       credetialsForm.append('email', res.user.email);
+  //       credetialsForm.append('password', res.user.password);
+  //       this.apiService.login(credetialsForm);
+  //       this.openSnackBar('Successfully logged in', 'ok');
+  //       localStorage.setItem('email', <any>credetialsForm.getAll('email'));
+  //       this.showSpinner = false;
+  //     },
+  //     (err) => {
+  //       this.openSnackBar('Error: Failed to login, please try again', 'ok');
+  //       this.showSpinner = false;
+  //     }
+  //   );
+  // }
+
   ngOnInit(): void {
+    console.log(this.accountService.isAuth());
     $(document)
       .find('#b-register_but')
       .on('click', function () {
