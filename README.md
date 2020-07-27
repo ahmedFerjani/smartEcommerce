@@ -13,7 +13,7 @@ The project is built with different technologies :
     -backEnd : django
     -AI : openCV, Dialogueflow, microsoft cognitive services
   
-Video demonstration : 
+Project demonstration (video): 
   https://drive.google.com/file/d/10AsKnmQ2uVNARkqMNAB7dDdtVDveffXA/view?fbclid=IwAR3U3nURgSSoNig_voJi_EgBhg2Q6UUc7NU0kQ8raECa4gEU4avaG2fxLEA
   
  
